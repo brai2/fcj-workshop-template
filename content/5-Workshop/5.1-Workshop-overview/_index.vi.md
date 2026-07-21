@@ -6,14 +6,54 @@ chapter : false
 pre : " <b> 5.1. </b> "
 ---
 
-#### Giới thiệu về VPC Endpoint
+#### Mục tiêu workshop
 
-+ Điểm cuối VPC (endpoint) là thiết bị ảo. Chúng là các thành phần VPC có thể mở rộng theo chiều ngang, dự phòng và có tính sẵn sàng cao. Chúng cho phép giao tiếp giữa tài nguyên điện toán của bạn và dịch vụ AWS mà không gây ra rủi ro về tính sẵn sàng.
-+ Tài nguyên điện toán đang chạy trong VPC có thể truy cập Amazon S3 bằng cách sử dụng điểm cuối Gateway. Interface Endpoint  PrivateLink có thể được sử dụng bởi tài nguyên chạy trong VPC hoặc tại TTDL.
+Sau khi hoàn thành workshop, bạn sẽ:
 
-#### Tổng quan về workshop
-Trong workshop này, bạn sẽ sử dụng hai VPC.
-+ **"VPC Cloud"** dành cho các tài nguyên cloud như Gateway endpoint và EC2 instance để kiểm tra.
-+ **"VPC On-Prem"** mô phỏng môi trường truyền thống như nhà máy hoặc trung tâm dữ liệu của công ty. Một EC2 Instance chạy phần mềm StrongSwan VPN đã được triển khai trong "VPC On-prem" và được cấu hình tự động để thiết lập đường hầm VPN Site-to-Site với AWS Transit Gateway. VPN này mô phỏng kết nối từ một vị trí tại TTDL (on-prem) với AWS cloud. Để giảm thiểu chi phí, chỉ một phiên bản VPN được cung cấp để hỗ trợ workshop này. Khi lập kế hoạch kết nối VPN cho production workloads của bạn, AWS khuyên bạn nên sử dụng nhiều thiết bị VPN để có tính sẵn sàng cao.
+- Triển khai được nền tảng WebFood đầy đủ trên AWS Serverless.
+- Hiểu luồng request từ CloudFront → API Gateway → Lambda → MongoDB Atlas.
+- Cấu hình event-driven pipeline: EventBridge → SQS/Worker/SES và WebSocket notify.
+- Vận hành frontend React trên S3 + CloudFront với WAF bảo vệ.
 
-![overview](/images/5-Workshop/5.1-Workshop-overview/diagram1.png)
+#### Kiến trúc tổng quan
+
+WebFood sử dụng mô hình serverless: không có EC2, toàn bộ compute chạy trên Lambda. Frontend là SPA React được build tĩnh và host trên S3, phân phối qua CloudFront.
+
+![Kiến trúc WebFood](/images/5-Workshop/5.1-Workshop-overview/webfood_architecture.png)
+
+#### Luồng xử lý chính
+
+1. **Đặt hàng (REST)**: Browser → CloudFront `/api/*` → API Gateway REST → Lambda `webfood-api` → MongoDB → publish EventBridge.
+2. **Email (async)**: EventBridge rule → SQS → Lambda `webfood-worker` → SES gửi email xác nhận.
+3. **Real-time (WebSocket)**: EventBridge rule → Lambda `webfood-ws-notify` → API Gateway WebSocket → client nhận toast voucher/đơn hàng.
+4. **Kết nối WS**: Client mở WebSocket → Lambda `webfood-ws-connect` → lưu `connectionId` vào DynamoDB.
+
+#### Các Lambda function
+
+| Function | Handler | Vai trò |
+|----------|---------|---------|
+| `webfood-api` | `src/lambda.handler` | REST API (Express app) |
+| `webfood-worker` | `src/lambda-worker.handler` | Xử lý SQS, gửi email SES |
+| `webfood-ws-connect` | `src/lambda-ws-connect.handler` | Route `$connect` |
+| `webfood-ws-disconnect` | `src/lambda-ws-disconnect.handler` | Route `$disconnect` |
+| `webfood-ws-notify` | `src/lambda-ws-notify.handler` | Push message qua WebSocket |
+
+#### Event types trên EventBridge
+
+- `OrderCreated` — đơn hàng mới
+- `OrderStatusChanged` — cập nhật trạng thái
+- `PaymentSucceeded` — thanh toán MoMo thành công
+- `VoucherPublished` — admin publish voucher (chỉ gửi WebSocket)
+
+#### Lộ trình workshop
+
+| Mục | Nội dung |
+|-----|----------|
+| [5.2 Chuẩn bị](../5.2-Prerequisites/) | Tài khoản, công cụ |
+| [5.3 Bí mật & Lưu trữ](../5.3-Secrets-Storage/) | Secrets Manager, S3 |
+| [5.4 Dữ liệu & Messaging](../5.4-Data-Messaging/) | DynamoDB, SQS, EventBridge, SNS |
+| [5.5 Lambda](../5.5-Lambda/) | IAM, functions, SQS trigger |
+| [5.6 API & Sự kiện](../5.6-API-Gateway/) | Rules, REST, WebSocket |
+| [5.7 CDN & Vận hành](../5.7-CDN-Operations/) | WAF, CloudFront, SES, frontend |
+| [5.8 Kiểm thử](../5.8-Smoke-Test/) | Smoke test |
+| [5.9 Dọn dẹp](../5.9-Teardown/) | Xóa resources |

@@ -5,111 +5,144 @@ weight: 2
 chapter: false
 pre: " <b> 2. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your report, including this warning.
-{{% /notice %}}
 
-In this section, you need to summarize the contents of the workshop that you **plan** to conduct.
+In this section, I present the workshop proposal for **WebFood** — an online food ordering platform deployed on AWS Serverless architecture.
 
-# IoT Weather Platform for Lab Research
-## A Unified AWS Serverless Solution for Real-Time Weather Monitoring
+# WebFood — Online Food Ordering Platform
+## AWS Serverless Solution for F&B E-Commerce
 
 ### 1. Executive Summary
-The IoT Weather Platform is designed for the ITea Lab team in Ho Chi Minh City to enhance weather data collection and analysis. It supports up to 5 weather stations, with potential scalability to 10-15, utilizing Raspberry Pi edge devices with ESP32 sensors to transmit data via MQTT. The platform leverages AWS Serverless services to deliver real-time monitoring, predictive analytics, and cost efficiency, with access restricted to 5 lab members via Amazon Cognito.
+
+WebFood is an online food ordering platform supporting three user roles: **Customer** (browse menu, cart, MoMo payment), **Merchant** (manage products, orders, statistics), and **Admin** (approve restaurants, vouchers, platform finances). The application is built with React (frontend) and Node.js/Express (backend), with business data stored on MongoDB Atlas.
+
+Within the workshop scope, the project is deployed on AWS using a full serverless architecture: CloudFront + WAF for frontend and media delivery, API Gateway REST + Lambda for APIs, API Gateway WebSocket + DynamoDB for real-time notifications, and EventBridge + SQS + Lambda Worker for asynchronous processing (SES email). The solution is suitable for demo/learning environments with low operating costs and request-based scalability.
 
 ### 2. Problem Statement
-### What’s the Problem?
-Current weather stations require manual data collection, becoming unmanageable with multiple units. There is no centralized system for real-time data or analytics, and third-party platforms are costly and overly complex.
 
-### The Solution
-The platform uses AWS IoT Core to ingest MQTT data, AWS Lambda and API Gateway for processing, Amazon S3 for storage (including a data lake), and AWS Glue Crawlers and ETL jobs to extract, transform, and load data from the S3 data lake to another S3 bucket for analysis. AWS Amplify with Next.js provides the web interface, and Amazon Cognito ensures secure access. Similar to Thingsboard and CoreIoT, users can register new devices and manage connections, though this platform operates on a smaller scale and is designed for private use. Key features include real-time dashboards, trend analysis, and low operational costs.
+*Current Problem*
 
-### Benefits and Return on Investment
-The solution establishes a foundational resource for lab members to develop a larger IoT platform, serving as a study resource, and provides a data foundation for AI enthusiasts for model training or analysis. It reduces manual reporting for each station via a centralized platform, simplifying management and maintenance, and improves data reliability. Monthly costs are $0.66 USD per the AWS Pricing Calculator, with a 12-month total of $7.92 USD. All IoT equipment costs are covered by the existing weather station setup, eliminating additional development expenses. The break-even period of 6-12 months is achieved through significant time savings from reduced manual work.
+Traditional food ordering often relies on phone calls, manual chat, or fragmented systems between customers and restaurants. As the number of restaurants and orders grows, tracking order status, sending notifications, and managing vouchers becomes difficult to control. Deploying on fixed servers (EC2) also requires maintenance costs even without traffic.
+
+*Solution*
+
+WebFood centralizes the ordering flow on a multi-role web platform, combined with MoMo sandbox payment and an event-driven architecture on AWS. When business events occur (order created, status changed, payment succeeded, voucher published), the system publishes events to EventBridge while sending email via SQS/Worker/SES and pushing real-time notifications via WebSocket.
+
+*Benefits and ROI*
+
+- Reduced infrastructure costs through pay-per-use model (Lambda, API Gateway, S3).
+- Separation of static frontend (S3/CloudFront) and API backend (Lambda), easier to maintain and scale.
+- Event-driven design enables feature extension (email, notifications) without modifying core API.
+- Estimated cost of approximately **$8–15/month** for demo workload (see section 6), significantly lower than maintaining EC2 24/7.
 
 ### 3. Solution Architecture
-The platform employs a serverless AWS architecture to manage data from 5 Raspberry Pi-based stations, scalable to 15. Data is ingested via AWS IoT Core, stored in an S3 data lake, and processed by AWS Glue Crawlers and ETL jobs to transform and load it into another S3 bucket for analysis. Lambda and API Gateway handle additional processing, while Amplify with Next.js hosts the dashboard, secured by Cognito. The architecture is detailed below:
 
-![IoT Weather Station Architecture](/images/2-Proposal/edge_architecture.jpeg)
+WebFood applies serverless architecture per `docs/wedfood.drawio`, deployed in **us-east-1** region (required for WAF on CloudFront).
 
-![IoT Weather Platform Architecture](/images/2-Proposal/platform_architecture.jpeg)
+![WebFood Architecture on AWS](/images/2-Proposal/webfood_architecture.png)
 
-### AWS Services Used
-- **AWS IoT Core**: Ingests MQTT data from 5 stations, scalable to 15.
-- **AWS Lambda**: Processes data and triggers Glue jobs (two functions).
-- **Amazon API Gateway**: Facilitates web app communication.
-- **Amazon S3**: Stores raw data in a data lake and processed outputs (two buckets).
-- **AWS Glue**: Crawlers catalog data, and ETL jobs transform and load it.
-- **AWS Amplify**: Hosts the Next.js web interface.
-- **Amazon Cognito**: Secures access for lab users.
+*AWS Services Used*
 
-### Component Design
-- **Edge Devices**: Raspberry Pi collects and filters sensor data, sending it to IoT Core.
-- **Data Ingestion**: AWS IoT Core receives MQTT messages from the edge devices.
-- **Data Storage**: Raw data is stored in an S3 data lake; processed data is stored in another S3 bucket.
-- **Data Processing**: AWS Glue Crawlers catalog the data, and ETL jobs transform it for analysis.
-- **Web Interface**: AWS Amplify hosts a Next.js app for real-time dashboards and analytics.
-- **User Management**: Amazon Cognito manages user access, allowing up to 5 active accounts.
+| Group | Service | Role |
+|-------|---------|------|
+| Edge | CloudFront, WAF, CloudFront Functions | CDN, protection, SPA routing |
+| Storage | S3 (frontend + media) | Host React build, store product images |
+| Compute | Lambda (5 functions) | Express API, email worker, WebSocket handlers |
+| API | API Gateway REST + WebSocket | REST `/api/*`, real-time `$connect`/`$disconnect` |
+| Database | DynamoDB | Store WebSocket connectionId by userId |
+| Messaging | EventBridge, SQS + DLQ, SNS | Event bus, worker queue, alerts |
+| Security | Secrets Manager, IAM, OAC | JWT/MoMo/MongoDB credentials, bucket policy |
+| Observability | CloudWatch, X-Ray | Logs, alarms, distributed tracing |
+| Email | SES | Order confirmation, password reset |
+
+*Component Design*
+
+- **Frontend**: React 19 + Vite, static build uploaded to S3, served via CloudFront.
+- **ApiFunction** (`webfood-api`): Wraps Express app via `@codegenie/serverless-express`, connects to MongoDB Atlas, publishes events to EventBridge.
+- **WorkerFunction** (`webfood-worker`): SQS trigger, sends email via SES on `OrderCreated`, `OrderStatusChanged`, `PaymentSucceeded`.
+- **WebSocket Lambdas**: `ws-connect`/`ws-disconnect` manage DynamoDB; `ws-notify` receives EventBridge events, pushes messages to clients.
+- **MongoDB Atlas**: Primary database (User, Restaurant, Product, Order, Voucher, etc.) — outside AWS VPC.
 
 ### 4. Technical Implementation
-**Implementation Phases**
-This project has two parts—setting up weather edge stations and building the weather platform—each following 4 phases:
-- Build Theory and Draw Architecture: Research Raspberry Pi setup with ESP32 sensors and design the AWS serverless architecture (1 month pre-internship)
-- Calculate Price and Check Practicality: Use AWS Pricing Calculator to estimate costs and adjust if needed (Month 1).
-- Fix Architecture for Cost or Solution Fit: Tweak the design (e.g., optimize Lambda with Next.js) to stay cost-effective and usable (Month 2).
-- Develop, Test, and Deploy: Code the Raspberry Pi setup, AWS services with CDK/SDK, and Next.js app, then test and release to production (Months 2-3).
 
-**Technical Requirements**
-- Weather Edge Station: Sensors (temperature, humidity, rainfall, wind speed), a microcontroller (ESP32), and a Raspberry Pi as the edge device. Raspberry Pi runs Raspbian, handles Docker for filtering, and sends 1 MB/day per station via MQTT over Wi-Fi.
-- Weather Platform: Practical knowledge of AWS Amplify (hosting Next.js), Lambda (minimal use due to Next.js), AWS Glue (ETL), S3 (two buckets), IoT Core (gateway and rules), and Cognito (5 users). Use AWS CDK/SDK to code interactions (e.g., IoT Core rules to S3). Next.js reduces Lambda workload for the fullstack web app.
+*Implementation Phases*
+
+1. **Local development** (Weeks 4–6): React frontend + Express/Mongoose backend, JWT auth, ordering flow, MoMo sandbox integration.
+2. **AWS architecture design** (Weeks 7–8): Draw `wedfood.drawio`, write SAM template (`infra/template.yaml`), standardize Lambda handlers.
+3. **AWS deployment** (Weeks 9–10): Manual Console deployment per `DEPLOY_CONSOLE.md` (or `sam deploy`) — Secrets Manager, S3, Lambda, API Gateway, CloudFront.
+4. **Testing & optimization** (Weeks 11–12): End-to-end smoke test, enable X-Ray, CloudWatch alarms, update CloudFront/MoMo environment variables.
+
+*Technical Requirements*
+
+- **Local**: Node.js 20+, MongoDB, npm for `backend/` and `frontend/`.
+- **AWS**: Account with permissions to create Lambda, API Gateway, S3, CloudFront, WAF, EventBridge, DynamoDB, SQS, SES.
+- **Third-party**: MongoDB Atlas cluster, MoMo Test account, SES-verified email.
+- **IaC**: AWS SAM (`template.yaml`) or Console click-ops for workshop reporting purposes.
 
 ### 5. Timeline & Milestones
-**Project Timeline**
-- Pre-Internship (Month 0): 1 month for planning and old station review.
-- Internship (Months 1-3): 3 months.
-    - Month 1: Study AWS and upgrade hardware.
-    - Month 2: Design and adjust architecture.
-    - Month 3: Implement, test, and launch.
-- Post-Launch: Up to 1 year for research.
+
+| Phase | Timeline | Key Milestones |
+|-------|----------|----------------|
+| Learn AWS basics | Weeks 1–3 (17/04 – 08/05/2026) | Free Tier, EC2, S3, VPC, IAM, CLI |
+| Develop WebFood locally | Weeks 4–8 (11/05 – 12/06/2026) | Learn Lightsail, ELB, CloudWatch; design WebFood |
+| Design serverless | Weeks 8–9 (08/06 – 19/06/2026) | `wedfood.drawio`, SAM template, Lambda adapter |
+| Deploy production | Weeks 9–10 (15/06 – 26/06/2026) | Console deploy, CloudFront live |
+| Testing & reporting | Weeks 11–14 (29/06 – 30/07/2026) | Smoke test, workshop doc, Hugo site |
 
 ### 6. Budget Estimation
-You can find the budget estimation on the [AWS Pricing Calculator](https://calculator.aws/#/estimate?id=621f38b12a1ef026842ba2ddfe46ff936ed4ab01).  
-Or you can download the [Budget Estimation File](../attachments/budget_estimation.pdf).
 
-### Infrastructure Costs
-- AWS Services:
-    - AWS Lambda: $0.00/month (1,000 requests, 512 MB storage).
-    - S3 Standard: $0.15/month (6 GB, 2,100 requests, 1 GB scanned).
-    - Data Transfer: $0.02/month (1 GB inbound, 1 GB outbound).
-    - AWS Amplify: $0.35/month (256 MB, 500 ms requests).
-    - Amazon API Gateway: $0.01/month (2,000 requests).
-    - AWS Glue ETL Jobs: $0.02/month (2 DPUs).
-    - AWS Glue Crawlers: $0.07/month (1 crawler).
-    - MQTT (IoT Core): $0.08/month (5 devices, 45,000 messages).
+Estimated monthly cost for demo workload (~10,000 API requests, ~5 GB CloudFront transfer):
 
-Total: $0.7/month, $8.40/12 months
+| Service | Estimated Cost/Month |
+|---------|---------------------|
+| AWS Lambda (5 functions) | ~$1.50 |
+| API Gateway REST + WebSocket | ~$2.00 |
+| Amazon CloudFront | ~$2.50 |
+| Amazon S3 (frontend + media) | ~$0.50 |
+| DynamoDB (on-demand) | ~$0.25 |
+| EventBridge + SQS | ~$0.10 |
+| AWS WAF | ~$5.00 |
+| Amazon SES | ~$0.10 |
+| Secrets Manager | ~$0.40 |
+| **Total** | **~$12.35/month** (~$148/year) |
 
-- Hardware: $265 one-time (Raspberry Pi 5 and sensors).
+View details on [AWS Pricing Calculator](https://calculator.aws/#/estimate?id=webfood-serverless-estimate).
+
+Or download [budget estimation file](../attachments/budget_estimation.pdf).
 
 ### 7. Risk Assessment
-#### Risk Matrix
-- Network Outages: Medium impact, medium probability.
-- Sensor Failures: High impact, low probability.
-- Cost Overruns: Medium impact, low probability.
 
-#### Mitigation Strategies
-- Network: Local storage on Raspberry Pi with Docker.
-- Sensors: Regular checks and spares.
-- Cost: AWS budget alerts and optimization.
+*Risk Matrix*
 
-#### Contingency Plans
-- Revert to manual methods if AWS fails.
-- Use CloudFormation for cost-related rollbacks.
+| Risk | Impact | Probability |
+|------|--------|-------------|
+| Lambda cold start | Medium | Medium |
+| MongoDB Atlas connection loss | High | Low |
+| MoMo sandbox unresponsive | Medium | Low |
+| WAF/CloudFront cost exceeds Free Tier | Medium | Medium |
+| Lambda zip > 50 MB (node_modules) | Medium | Medium |
+
+*Mitigation Strategies*
+
+- Provisioned concurrency for `webfood-api` if needed (production).
+- MongoDB Atlas: IP whitelist, connection pool monitoring.
+- CloudWatch billing alarm + SNS notification.
+- `npm install --omit=dev` when packaging Lambda; upload via S3 if zip is large.
+
+*Contingency Plan*
+
+- Fallback to local mode (Express + MongoDB) when AWS has issues during demo.
+- SAM template (`infra/template.yaml`) for quick stack recreation after teardown.
 
 ### 8. Expected Outcomes
-#### Technical Improvements: 
-Real-time data and analytics replace manual processes.  
-Scalable to 10-15 stations.
-#### Long-term Value
-1-year data foundation for AI research.  
-Reusable for future projects.
+
+*Technical Improvements*
+
+- End-to-end ordering flow: customer places order → API Lambda → EventBridge → SES email + WebSocket voucher toast.
+- Centralized administration: admin approves restaurants, merchant updates menu, customer tracks orders in real-time.
+- Scalable architecture: add new event types on EventBridge without API refactoring.
+
+*Long-term Value*
+
+- Reference platform for serverless e-commerce projects on AWS.
+- Comprehensive hands-on experience: IaC (SAM), event-driven, CDN, WebSocket, observability.
+- Can extend to production with Cognito auth, CI/CD pipeline, and multi-region.

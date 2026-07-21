@@ -1,125 +1,91 @@
 ---
-title: "Event 2"
-date: 2024-01-01
-weight: 1
+title: "Meetup FCAJ AI (06/06/2026)"
+date: 2026-06-06
+weight: 2
 chapter: false
 pre: " <b> 4.2. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
+# Bài thu hoạch Meetup 06/06/2026 — First Cloud Journey AI
 
-# Bài thu hoạch “GenAI-powered App-DB Modernization workshop”
+### Mục đích của sự kiện
 
-### Mục Đích Của Sự Kiện
+- Chia sẻ kiến thức thực tế từ cộng đồng học viên / diễn giả First Cloud Journey AI
+- Kết nối các chủ đề Cloud, DevOps, bảo mật, game multiplayer và soft skills
+- Học hỏi lộ trình nghề nghiệp và cách làm việc nhóm hiệu quả
 
-- Chia sẻ best practices trong thiết kế ứng dụng hiện đại
-- Giới thiệu phương pháp DDD và event-driven architecture
-- Hướng dẫn lựa chọn compute services phù hợp
-- Giới thiệu công cụ AI hỗ trợ development lifecycle
+### Thông tin sự kiện
 
-### Danh Sách Diễn Giả
+- **Tên sự kiện:** Meetup First Cloud Journey AI (06/06/2026)
+- **Thời gian:** ngày **06/06/2026**
+- **Địa điểm:** Tầng 26 - Văn phòng AWS Việt Nam (Tòa nhà Bitexco, Số 2 Hải Triều, Phường Sài Gòn, TP.HCM)
+- **Vai trò:** Người tham dự
+- **Nguồn slide:** [Thư mục Google Drive của meetup](https://drive.google.com/drive/folders/1EgyIOIjUsgAMugJDcKKQy-AYbWkrHrLX)
 
-- **Jignesh Shah** - Director, Open Source Databases
-- **Erica Liu** - Sr. GTM Specialist, AppMod
-- **Fabrianne Effendi** - Assc. Specialist SA, Serverless Amazon Web Services
+### Danh sách diễn giả & slide mở đầu
 
-### Nội Dung Nổi Bật
+Dưới đây là **slide đầu** của từng bài trình bày trong meetup.
 
-#### Đưa ra các ảnh hưởng tiêu cực của kiến trúc ứng dụng cũ
+#### 1. Bảo Huỳnh — Docker: A containerization technology
 
-- Thời gian release sản phẩm lâu → Mất doanh thu/bỏ lỡ cơ hội
-- Hoạt động kém hiệu quả → Mất năng suất, tốn kém chi phí
-- Không tuân thủ các quy định về bảo mật → Mất an ninh, uy tín
+- Junior Cloud Native Developer (Endava Vietnam), Founder / Head Lab (ITea Lab)
+- Giới thiệu Docker như công nghệ containerization, nền tảng cho Cloud Native và DevOps
 
-#### Chuyển đổi sang kiến trúc ứng dụng mới - Microservice Architecture
+![Slide đầu — Bảo Huỳnh](/images/4-EventParticipated/4.2-Event2/bao-huynh-slide1.png)
 
-Chuyển đổi thành hệ thống modular – từng chức năng là một **dịch vụ độc lập** giao tiếp với nhau qua **sự kiện** với 3 trụ cột cốt lõi:
+#### 2. Lê Hoàng Gia Đại — WAF + ML for Cyber Attack Detection
 
-- **Queue Management**: Xử lý tác vụ bất đồng bộ
-- **Caching Strategy:** Tối ưu performance
-- **Message Handling:** Giao tiếp linh hoạt giữa services
+- AWS G3 — Machine Learning-based Network Intrusion Detection System (NIDS) on AWS
+- Kết hợp AWS WAF với Machine Learning để phát hiện tấn công mạng trên AWS
 
-#### Domain-Driven Design (DDD)
+![Slide đầu — Lê Hoàng Gia Đại](/images/4-EventParticipated/4.2-Event2/le-hoang-gia-dai-slide1.png)
 
-- **Phương pháp 4 bước**: Xác định domain events → sắp xếp timeline → identify actors → xác định bounded contexts
-- **Case study bookstore**: Minh họa cách áp dụng DDD thực tế
-- **Context mapping**: 7 patterns tích hợp bounded contexts
+#### 3. Nguyễn Quốc Bảo — Multiplayer in the Cloud
 
-#### Event-Driven Architecture
+- Kết nối client Godot với AWS WebSockets (Lambda, DynamoDB)
+- Minh họa kiến trúc realtime multiplayer trên cloud
 
-- **3 patterns tích hợp**: Publish/Subscribe, Point-to-point, Streaming
-- **Lợi ích**: Loose coupling, scalability, resilience
-- **So sánh sync vs async**: Hiểu rõ trade-offs (sự đánh đổi)
+![Slide đầu — Nguyễn Quốc Bảo](/images/4-EventParticipated/4.2-Event2/nguyen-quoc-bao-slide1.png)
 
-#### Compute Evolution
+#### 4. Trương Phước — The Art of Effective Teamwork
 
-- **Shared Responsibility Model**: Từ EC2 → ECS → Fargate → Lambda
-- **Serverless benefits**: No server management, auto-scaling, pay-for-value
-- **Functions vs Containers**: Criteria lựa chọn phù hợp
+- Soft skills: cách làm việc nhóm hiệu quả (“Many hands make light work”)
+- Bổ sung góc nhìn teamwork bên cạnh các phiên kỹ thuật
 
-#### Amazon Q Developer
+![Slide đầu — Trương Phước](/images/4-EventParticipated/4.2-Event2/truong-phuoc-slide1.png)
 
-- **SDLC automation**: Từ planning đến maintenance
-- **Code transformation**: Java upgrade, .NET modernization
-- **AWS Transform agents**: VMware, Mainframe, .NET migration
+#### 5. Việt Phát — GraphRAG với Amazon Bedrock & Amazon Neptune
 
-### Những Gì Học Được
+- Xây dựng Graph Knowledge Base / GraphRAG trên AWS Neptune và Bedrock
+- Hướng tiếp cận RAG dựa trên đồ thị tri thức
 
-#### Tư Duy Thiết Kế
+![Slide đầu — Việt Phát](/images/4-EventParticipated/4.2-Event2/viet-phat-slide1.png)
 
-- **Business-first approach**: Luôn bắt đầu từ business domain, không phải technology
-- **Ubiquitous language**: Importance của common vocabulary giữa business và tech teams
-- **Bounded contexts**: Cách identify và manage complexity trong large systems
+#### 6. Vinh Trần — From IT Helpdesk to Senior Sysadmin
 
-#### Kiến Trúc Kỹ Thuật
+- System Administrator tại Central Retail Group
+- Chia sẻ hành trình tự học và lộ trình dịch chuyển sang Cloud / DevOps
 
-- **Event storming technique**: Phương pháp thực tế để mô hình hóa quy trình kinh doanh
-- Sử dụng **Event-driven communication** thay vì synchronous calls
-- **Integration patterns**: Hiểu khi nào dùng sync, async, pub/sub, streaming
-- **Compute spectrum**: Criteria chọn từ VM → containers → serverless
+![Slide đầu — Vinh Trần](/images/4-EventParticipated/4.2-Event2/vinh-tran-slide1.png)
 
-#### Chiến Lược Hiện Đại Hóa
+### Nội dung nổi bật
 
-- **Phased approach**: Không rush, phải có roadmap rõ ràng
-- **7Rs framework**: Nhiều con đường khác nhau tùy thuộc vào đặc điểm của mỗi ứng dụng
-- **ROI measurement**: Cost reduction + business agility
+- **Container & Cloud Native:** Docker giúp đóng gói ứng dụng nhất quán giữa môi trường local và cloud.
+- **Bảo mật ứng dụng trên AWS:** WAF kết hợp ML/NIDS mở rộng khả năng phát hiện tấn công vượt rule tĩnh.
+- **Realtime trên AWS:** WebSocket + Lambda + DynamoDB là mô hình phù hợp cho multiplayer / cập nhật realtime (liên quan tới WebFood WebSocket).
+- **GraphRAG:** Neptune + Bedrock cho kiến thức dạng đồ thị, khác với RAG thuần vector.
+- **Career & soft skills:** lộ trình từ Helpdesk → Sysadmin → Cloud/DevOps; teamwork là kỹ năng song hành với kỹ thuật.
 
-### Ứng Dụng Vào Công Việc
+### Những gì học được & ứng dụng
 
-- **Áp dụng DDD** cho project hiện tại: Event storming sessions với business team
-- **Refactor microservices**: Sử dụng bounded contexts để identify service boundaries
-- **Implement event-driven patterns**: Thay thế một số sync calls bằng async messaging
-- **Serverless adoption**: Pilot AWS Lambda cho một số use cases phù hợp
-- **Try Amazon Q Developer**: Integrate vào development workflow để boost productivity
+- Hiểu rõ hơn vai trò **container** khi so sánh với mô hình serverless đang dùng ở dự án **WebFood**.
+- Liên hệ phần **WAF** trong kiến trúc WebFood với hướng phát hiện tấn công bằng ML.
+- Củng cố kiến thức **API Gateway WebSocket** khi xem case Godot multiplayer.
+- Nhận thêm góc nhìn về **GraphRAG / Neptune** cho các bài blog / thử nghiệm AI trên AWS.
+- Học cách trình bày lộ trình nghề nghiệp và làm việc nhóm trong môi trường thực tập.
 
 ### Trải nghiệm trong event
 
-Tham gia workshop **“GenAI-powered App-DB Modernization”** là một trải nghiệm rất bổ ích, giúp tôi có cái nhìn toàn diện về cách hiện đại hóa ứng dụng và cơ sở dữ liệu bằng các phương pháp và công cụ hiện đại. Một số trải nghiệm nổi bật:
+Meetup mang lại không khí cộng đồng: nhiều chủ đề đa dạng trong một buổi, từ kỹ thuật sâu (WAF+ML, GraphRAG, WebSocket) đến soft skills và career path. Việc xem slide đầu của từng speaker giúp nắm nhanh “hook” của mỗi bài trước khi đi sâu nội dung.
 
-#### Học hỏi từ các diễn giả có chuyên môn cao
-- Các diễn giả đến từ AWS và các tổ chức công nghệ lớn đã chia sẻ **best practices** trong thiết kế ứng dụng hiện đại.
-- Qua các case study thực tế, tôi hiểu rõ hơn cách áp dụng **Domain-Driven Design (DDD)** và **Event-Driven Architecture** vào các project lớn.
-
-#### Trải nghiệm kỹ thuật thực tế
-- Tham gia các phiên trình bày về **event storming** giúp tôi hình dung cách **mô hình hóa quy trình kinh doanh** thành các domain events.
-- Học cách **phân tách microservices** và xác định **bounded contexts** để quản lý sự phức tạp của hệ thống lớn.
-- Hiểu rõ trade-offs giữa **synchronous và asynchronous communication** cũng như các pattern tích hợp như **pub/sub, point-to-point, streaming**.
-
-#### Ứng dụng công cụ hiện đại
-- Trực tiếp tìm hiểu về **Amazon Q Developer**, công cụ AI hỗ trợ SDLC từ lập kế hoạch đến maintenance.
-- Học cách **tự động hóa code transformation** và pilot serverless với **AWS Lambda**, từ đó nâng cao năng suất phát triển.
-
-#### Kết nối và trao đổi
-- Workshop tạo cơ hội trao đổi trực tiếp với các chuyên gia, đồng nghiệp và team business, giúp **nâng cao ngôn ngữ chung (ubiquitous language)** giữa business và tech.
-- Qua các ví dụ thực tế, tôi nhận ra tầm quan trọng của **business-first approach**, luôn bắt đầu từ nhu cầu kinh doanh thay vì chỉ tập trung vào công nghệ.
-
-#### Bài học rút ra
-- Việc áp dụng DDD và event-driven patterns giúp giảm **coupling**, tăng **scalability** và **resilience** cho hệ thống.
-- Chiến lược hiện đại hóa cần **phased approach** và đo lường **ROI**, không nên vội vàng chuyển đổi toàn bộ hệ thống.
-- Các công cụ AI như Amazon Q Developer có thể **boost productivity** nếu được tích hợp vào workflow phát triển hiện tại.
-
-#### Một số hình ảnh khi tham gia sự kiện
-* Thêm các hình ảnh của các bạn tại đây
-> Tổng thể, sự kiện không chỉ cung cấp kiến thức kỹ thuật mà còn giúp tôi thay đổi cách tư duy về thiết kế ứng dụng, hiện đại hóa hệ thống và phối hợp hiệu quả hơn giữa các team.
+> Tổng thể, Meetup 06/06 giúp em mở rộng góc nhìn Cloud/AI ngoài phạm vi lab serverless WebFood, đồng thời kết nối với cộng đồng First Cloud Journey AI.

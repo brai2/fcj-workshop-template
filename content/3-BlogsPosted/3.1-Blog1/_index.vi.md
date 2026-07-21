@@ -1,31 +1,101 @@
 ---
-title: "Blog 1"
+title: "Blog 1 — AI Agent trên Amazon Bedrock"
 date: 2024-01-01
 weight: 1
 chapter: false
 pre: " <b> 3.1. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
-# SESSION POLICIES TRONG AMAZON EKS POD IDENTITY
+# AI Agent trên Amazon Bedrock & AgentCore — AI không chỉ trả lời, mà còn làm được việc
 
-Amazon EKS Pod Identity vừa bổ sung tính năng session policies, cho phép bạn thu hẹp quyền IAM một cách linh hoạt và chính xác cho từng pod mà không cần tạo thêm nhiều IAM roles riêng biệt. Đây là bước tiến quan trọng giúp áp dụng nguyên tắc least privilege hiệu quả hơn trong môi trường Kubernetes quy mô lớn.
+Xin chào mọi người,
 
-Các điểm chính cần nắm:
+Trong quá trình tìm hiểu về AWS và Generative AI, mình thường đọc các bài viết trên AWS Blog để hiểu cách các doanh nghiệp ứng dụng công nghệ vào thực tế. Gần đây mình có tìm hiểu về cách AWS xây dựng hệ thống AI Agent sử dụng **Amazon Bedrock** và **AgentCore**, và nhận ra đây là một hướng tiếp cận rất đáng chú ý.
 
-* Session policy là một IAM policy inline được chỉ định khi tạo hoặc cập nhật Pod Identity association.
-* Quyền hiệu quả = intersection (giao) giữa permissions của IAM role và session policy → session policy chỉ có thể thu hẹp, không thể mở rộng quyền.
-* Giúp tránh tình trạng over-permissioning khi reuse chung một IAM role cho nhiều workloads có nhu cầu khác nhau.
-* Hỗ trợ cả same-account và cross-account (qua IAM role chaining).
-* Giảm đáng kể số lượng IAM roles cần quản lý, tránh chạm giới hạn quota IAM trong cluster lớn.
-* Cấu hình dễ dàng qua AWS Management Console, AWS CLI hoặc AWS SDK khi tạo association giữa Kubernetes ServiceAccount và IAM role.
+Ban đầu mình nghĩ các bài viết này sẽ tập trung vào mô hình AI hoặc độ mạnh của LLM. Nhưng sau khi tìm hiểu kỹ hơn, điều mình thấy giá trị nhất lại không nằm ở model, mà nằm ở **cách AWS thiết kế một hệ thống để AI có thể tự thực hiện công việc**.
 
-Tính năng này đặc biệt hữu ích khi bạn có nhiều ứng dụng chạy trên cùng một IAM role nhưng cần giới hạn quyền khác nhau (ví dụ: một pod chỉ đọc S3 bucket cụ thể, pod khác chỉ gọi một số API nhất định).
+### AI Agent không chỉ là chatbot
 
-...Hình ảnh...
+Trước đây, khi nhắc đến AI, mình thường nghĩ đến chatbot hoặc hệ thống trả lời câu hỏi.
 
-...Link...
+Nhưng với kiến trúc AI Agent trên AWS, AI không chỉ dừng lại ở việc trả lời, mà còn có thể:
 
-...Hướng dẫn...
+- Hiểu mục tiêu
+- Lập kế hoạch
+- Thực hiện từng bước
+- Quan sát kết quả
+- Và tiếp tục điều chỉnh hành động
+
+Điều này khiến AI hoạt động giống như một **“người vận hành hệ thống”** hơn là một công cụ hỗ trợ đơn thuần.
+
+### Kiến trúc hệ thống: Không phải AI làm tất cả
+
+Điểm mình thấy thú vị nhất là cách AWS thiết kế kiến trúc.
+
+AI không trực tiếp xử lý toàn bộ hệ thống, mà được đặt vào một flow rõ ràng:
+
+1. User gửi request qua CloudFront + API Gateway  
+2. Lambda xử lý logic trung gian  
+3. Request được chuyển vào AgentCore Runtime  
+4. Một Orchestrator Agent sẽ điều phối các sub-agent  
+5. Các agent này sử dụng Tools (API / service) để thực hiện hành động  
+
+![Kiến trúc AI Agent trên AWS](/images/3-BlogsPosted/ai-agent-architecture.png)
+
+Điều quan trọng là: **AI không thay thế hệ thống, mà hoạt động cùng hệ thống thông qua API**.
+
+### Multi-Agent: Chia nhỏ nhiệm vụ giống con người
+
+Một điểm mình thấy rất hay là hệ thống không chỉ có 1 AI, mà có nhiều agent:
+
+- Agent tìm thông tin (**Find**)
+- Agent lập kế hoạch (**Create**)
+- Agent thực thi (**Execute**)
+
+Cách này giống như trong team thật: người phân tích, người thiết kế, người triển khai. Nhờ đó dễ mở rộng, dễ debug, và logic rõ ràng hơn rất nhiều.
+
+### Tool Use — chìa khóa quan trọng nhất
+
+Một điều mình rút ra là: **AI chỉ thực sự “hữu dụng” khi nó có thể sử dụng công cụ**.
+
+Trong kiến trúc này:
+
+- AI không thao tác trực tiếp vào hệ thống
+- Mọi hành động đều thông qua API, Database, External service
+
+Điều này giúp hệ thống ổn định hơn, dễ thay đổi AI model, và không bị phụ thuộc vào một công nghệ.
+
+### Ứng dụng không chỉ dừng ở AI hay DevOps
+
+Sau khi hiểu mô hình này, mình nhận ra nó có thể áp dụng vào rất nhiều bài toán:
+
+- Tự động test website / app (giống QA)
+- Tự động xử lý ticket support
+- DevOps automation (deploy, monitor)
+- Data pipeline thông minh
+- AI assistant cho doanh nghiệp
+
+Chỉ cần thay đổi tool mà agent được phép sử dụng, toàn bộ hệ thống có thể dùng lại.
+
+### Góc nhìn cá nhân
+
+Điều mình thấy quan trọng nhất sau khi tìm hiểu là: **giá trị của AI không nằm ở việc “trả lời thông minh”, mà nằm ở việc làm được việc thực tế**.
+
+Amazon Bedrock trong hệ thống này không chỉ là nơi chạy model, mà là nền tảng để xây dựng AI Agent, kết nối với hệ thống, và tự động hóa quy trình.
+
+Điều này thay đổi hoàn toàn cách mình nhìn về AI: **không còn là tool → mà là một thành phần trong hệ thống**.
+
+### Kết luận
+
+Đối với mình, đây không đơn thuần là một kiến trúc AI, mà là một cách tiếp cận mới trong việc xây dựng hệ thống:
+
+- AI không đứng riêng lẻ
+- AI không thay thế hệ thống
+- AI trở thành một **“worker”** trong hệ thống
+
+Nếu bạn đang tìm hiểu về Amazon Bedrock, AI Agent, hoặc Generative AI trên AWS, thì đây là một hướng rất đáng để nghiên cứu — vì nó cho thấy cách công nghệ này được áp dụng vào thực tế, không chỉ dừng lại ở demo.
+
+---
+
+**Link bài viết trên Facebook:**  
+[https://www.facebook.com/groups/awsstudygroupfcj/permalink/2210158863082407/](https://www.facebook.com/groups/awsstudygroupfcj/permalink/2210158863082407/)

@@ -1,0 +1,74 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>
+endobj
+4 0 obj
+<< /Length 1546 >>
+stream
+BT
+/F1 11 Tf
+/F1 14 Tf
+1 0 0 1 50 780 Tm (WebFood - AWS Monthly Budget Estimation \\(Demo\\)) Tj
+/F1 10 Tf
+1 0 0 1 50 762 Tm () Tj
+/F1 10 Tf
+1 0 0 1 50 748 Tm (Assumptions: ~10,000 API requests/month, ~5 GB CloudFront, us-east-1.) Tj
+/F1 10 Tf
+1 0 0 1 50 734 Tm () Tj
+/F1 10 Tf
+1 0 0 1 50 720 Tm (Service                                 USD/month) Tj
+/F1 10 Tf
+1 0 0 1 50 706 Tm (------------------------------------------------) Tj
+/F1 10 Tf
+1 0 0 1 50 692 Tm (AWS Lambda \\(5 functions\\)                     1.50) Tj
+/F1 10 Tf
+1 0 0 1 50 678 Tm (API Gateway REST + WebSocket                 2.00) Tj
+/F1 10 Tf
+1 0 0 1 50 664 Tm (Amazon CloudFront                            2.50) Tj
+/F1 10 Tf
+1 0 0 1 50 650 Tm (Amazon S3 \\(frontend + media\\)                 0.50) Tj
+/F1 10 Tf
+1 0 0 1 50 636 Tm (DynamoDB \\(on-demand\\)                         0.25) Tj
+/F1 10 Tf
+1 0 0 1 50 622 Tm (EventBridge + SQS                            0.10) Tj
+/F1 10 Tf
+1 0 0 1 50 608 Tm (AWS WAF                                      5.00) Tj
+/F1 10 Tf
+1 0 0 1 50 594 Tm (Amazon SES                                   0.10) Tj
+/F1 10 Tf
+1 0 0 1 50 580 Tm (Secrets Manager                              0.40) Tj
+/F1 10 Tf
+1 0 0 1 50 566 Tm (------------------------------------------------) Tj
+/F1 10 Tf
+1 0 0 1 50 552 Tm (TOTAL                                       12.35) Tj
+/F1 10 Tf
+1 0 0 1 50 538 Tm () Tj
+/F1 10 Tf
+1 0 0 1 50 524 Tm (Reference: AWS Pricing Calculator.) Tj
+/F1 10 Tf
+1 0 0 1 50 510 Tm (Actual cost depends on traffic and Free Tier usage.) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Courier >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000241 00000 n 
+0000001839 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+1907
+%%EOF

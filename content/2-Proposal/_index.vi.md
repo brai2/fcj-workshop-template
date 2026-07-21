@@ -5,104 +5,144 @@ weight: 2
 chapter: false
 pre: " <b> 2. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
-Tại phần này, bạn cần tóm tắt các nội dung trong workshop mà bạn **dự tính** sẽ làm.
+Tại phần này, tôi trình bày bản đề xuất workshop **WebFood** — nền tảng đặt đồ ăn trực tuyến triển khai trên kiến trúc AWS Serverless.
 
-# IoT Weather Platform for Lab Research  
-## Giải pháp AWS Serverless hợp nhất cho giám sát thời tiết thời gian thực  
+# WebFood — Nền tảng đặt đồ ăn trực tuyến
+## Giải pháp AWS Serverless cho thương mại điện tử F&B
 
-### 1. Tóm tắt điều hành  
-IoT Weather Platform được thiết kế dành cho nhóm *ITea Lab* tại TP. Hồ Chí Minh nhằm nâng cao khả năng thu thập và phân tích dữ liệu thời tiết. Nền tảng hỗ trợ tối đa 5 trạm thời tiết, có khả năng mở rộng lên 10–15 trạm, sử dụng thiết bị biên Raspberry Pi kết hợp cảm biến ESP32 để truyền dữ liệu qua MQTT. Nền tảng tận dụng các dịch vụ AWS Serverless để cung cấp giám sát thời gian thực, phân tích dự đoán và tiết kiệm chi phí, với quyền truy cập giới hạn cho 5 thành viên phòng lab thông qua Amazon Cognito.  
+### 1. Tóm tắt điều hành
 
-### 2. Tuyên bố vấn đề  
-*Vấn đề hiện tại*  
-Các trạm thời tiết hiện tại yêu cầu thu thập dữ liệu thủ công, khó quản lý khi có nhiều trạm. Không có hệ thống tập trung cho dữ liệu hoặc phân tích thời gian thực, và các nền tảng bên thứ ba thường tốn kém và quá phức tạp.  
+WebFood là nền tảng đặt đồ ăn trực tuyến hỗ trợ ba vai trò người dùng: **Khách hàng** (duyệt menu, giỏ hàng, thanh toán MoMo), **Chủ quán** (quản lý sản phẩm, đơn hàng, thống kê) và **Quản trị viên** (duyệt nhà hàng, voucher, tài chính hệ thống). Ứng dụng được phát triển bằng React (frontend) và Node.js/Express (backend), lưu trữ dữ liệu nghiệp vụ trên MongoDB Atlas.
 
-*Giải pháp*  
-Nền tảng sử dụng AWS IoT Core để tiếp nhận dữ liệu MQTT, AWS Lambda và API Gateway để xử lý, Amazon S3 để lưu trữ (bao gồm data lake), và AWS Glue Crawlers cùng các tác vụ ETL để trích xuất, chuyển đổi, tải dữ liệu từ S3 data lake sang một S3 bucket khác để phân tích. AWS Amplify với Next.js cung cấp giao diện web, và Amazon Cognito đảm bảo quyền truy cập an toàn. Tương tự như Thingsboard và CoreIoT, người dùng có thể đăng ký thiết bị mới và quản lý kết nối, nhưng nền tảng này hoạt động ở quy mô nhỏ hơn và phục vụ mục đích sử dụng nội bộ. Các tính năng chính bao gồm bảng điều khiển thời gian thực, phân tích xu hướng và chi phí vận hành thấp.  
+Trong phạm vi workshop, dự án được triển khai lên AWS theo kiến trúc serverless đầy đủ: CloudFront + WAF phân phối frontend và media, API Gateway REST + Lambda xử lý API, API Gateway WebSocket + DynamoDB cho thông báo real-time, EventBridge + SQS + Lambda Worker cho xử lý bất đồng bộ (email SES). Giải pháp phù hợp cho môi trường demo/học tập với chi phí vận hành thấp và khả năng mở rộng theo lượng request.
 
-*Lợi ích và hoàn vốn đầu tư (ROI)*  
-Giải pháp tạo nền tảng cơ bản để các thành viên phòng lab phát triển một nền tảng IoT lớn hơn, đồng thời cung cấp nguồn dữ liệu cho những người nghiên cứu AI phục vụ huấn luyện mô hình hoặc phân tích. Nền tảng giảm bớt báo cáo thủ công cho từng trạm thông qua hệ thống tập trung, đơn giản hóa quản lý và bảo trì, đồng thời cải thiện độ tin cậy dữ liệu. Chi phí hàng tháng ước tính 0,66 USD (theo AWS Pricing Calculator), tổng cộng 7,92 USD cho 12 tháng. Tất cả thiết bị IoT đã được trang bị từ hệ thống trạm thời tiết hiện tại, không phát sinh chi phí phát triển thêm. Thời gian hoàn vốn 6–12 tháng nhờ tiết kiệm đáng kể thời gian thao tác thủ công.  
+### 2. Tuyên bố vấn đề
 
-### 3. Kiến trúc giải pháp  
-Nền tảng áp dụng kiến trúc AWS Serverless để quản lý dữ liệu từ 5 trạm dựa trên Raspberry Pi, có thể mở rộng lên 15 trạm. Dữ liệu được tiếp nhận qua AWS IoT Core, lưu trữ trong S3 data lake và xử lý bởi AWS Glue Crawlers và ETL jobs để chuyển đổi và tải vào một S3 bucket khác cho mục đích phân tích. Lambda và API Gateway xử lý bổ sung, trong khi Amplify với Next.js cung cấp bảng điều khiển được bảo mật bởi Cognito.  
+*Vấn đề hiện tại*
 
-![IoT Weather Station Architecture](/images/2-Proposal/edge_architecture.jpeg)
+Các mô hình đặt đồ ăn truyền thống thường phụ thuộc vào gọi điện, chat thủ công hoặc hệ thống rời rạc giữa khách hàng và nhà hàng. Khi số lượng quán và đơn hàng tăng, việc theo dõi trạng thái đơn, gửi thông báo và quản lý voucher trở nên khó kiểm soát. Triển khai trên server cố định (EC2) cũng đòi hỏi chi phí duy trì ngay cả khi không có traffic.
 
-![IoT Weather Platform Architecture](/images/2-Proposal/platform_architecture.jpeg)
+*Giải pháp*
 
-*Dịch vụ AWS sử dụng*  
-- *AWS IoT Core*: Tiếp nhận dữ liệu MQTT từ 5 trạm, mở rộng lên 15.  
-- *AWS Lambda*: Xử lý dữ liệu và kích hoạt Glue jobs (2 hàm).  
-- *Amazon API Gateway*: Giao tiếp với ứng dụng web.  
-- *Amazon S3*: Lưu trữ dữ liệu thô (data lake) và dữ liệu đã xử lý (2 bucket).  
-- *AWS Glue*: Crawlers lập chỉ mục dữ liệu, ETL jobs chuyển đổi và tải dữ liệu.  
-- *AWS Amplify*: Lưu trữ giao diện web Next.js.  
-- *Amazon Cognito*: Quản lý quyền truy cập cho người dùng phòng lab.  
+WebFood tập trung hóa luồng đặt hàng trên một nền tảng web đa vai trò, kết hợp thanh toán MoMo sandbox và kiến trúc event-driven trên AWS. Khi có sự kiện nghiệp vụ (tạo đơn, đổi trạng thái, thanh toán thành công, publish voucher), hệ thống publish event lên EventBridge, đồng thời gửi email qua SQS/Worker/SES và push thông báo real-time qua WebSocket.
 
-*Thiết kế thành phần*  
-- *Thiết bị biên*: Raspberry Pi thu thập và lọc dữ liệu cảm biến, gửi tới IoT Core.  
-- *Tiếp nhận dữ liệu*: AWS IoT Core nhận tin nhắn MQTT từ thiết bị biên.  
-- *Lưu trữ dữ liệu*: Dữ liệu thô lưu trong S3 data lake; dữ liệu đã xử lý lưu ở một S3 bucket khác.  
-- *Xử lý dữ liệu*: AWS Glue Crawlers lập chỉ mục dữ liệu; ETL jobs chuyển đổi để phân tích.  
-- *Giao diện web*: AWS Amplify lưu trữ ứng dụng Next.js cho bảng điều khiển và phân tích thời gian thực.  
-- *Quản lý người dùng*: Amazon Cognito giới hạn 5 tài khoản hoạt động.  
+*Lợi ích và hoàn vốn đầu tư (ROI)*
 
-### 4. Triển khai kỹ thuật  
-*Các giai đoạn triển khai*  
-Dự án gồm 2 phần — thiết lập trạm thời tiết biên và xây dựng nền tảng thời tiết — mỗi phần trải qua 4 giai đoạn:  
-1. *Nghiên cứu và vẽ kiến trúc*: Nghiên cứu Raspberry Pi với cảm biến ESP32 và thiết kế kiến trúc AWS Serverless (1 tháng trước kỳ thực tập).  
-2. *Tính toán chi phí và kiểm tra tính khả thi*: Sử dụng AWS Pricing Calculator để ước tính và điều chỉnh (Tháng 1).  
-3. *Điều chỉnh kiến trúc để tối ưu chi phí/giải pháp*: Tinh chỉnh (ví dụ tối ưu Lambda với Next.js) để đảm bảo hiệu quả (Tháng 2).  
-4. *Phát triển, kiểm thử, triển khai*: Lập trình Raspberry Pi, AWS services với CDK/SDK và ứng dụng Next.js, sau đó kiểm thử và đưa vào vận hành (Tháng 2–3).  
+- Giảm chi phí hạ tầng nhờ mô hình pay-per-use (Lambda, API Gateway, S3).
+- Tách biệt frontend tĩnh (S3/CloudFront) và backend API (Lambda), dễ bảo trì và scale.
+- Event-driven giúp mở rộng tính năng (email, notification) mà không sửa core API.
+- Chi phí ước tính khoảng **8–15 USD/tháng** cho workload demo (xem mục 6), thấp hơn đáng kể so với duy trì EC2 24/7.
 
-*Yêu cầu kỹ thuật*  
-- *Trạm thời tiết biên*: Cảm biến (nhiệt độ, độ ẩm, lượng mưa, tốc độ gió), vi điều khiển ESP32, Raspberry Pi làm thiết bị biên. Raspberry Pi chạy Raspbian, sử dụng Docker để lọc dữ liệu và gửi 1 MB/ngày/trạm qua MQTT qua Wi-Fi.  
-- *Nền tảng thời tiết*: Kiến thức thực tế về AWS Amplify (lưu trữ Next.js), Lambda (giảm thiểu do Next.js xử lý), AWS Glue (ETL), S3 (2 bucket), IoT Core (gateway và rules), và Cognito (5 người dùng). Sử dụng AWS CDK/SDK để lập trình (ví dụ IoT Core rules tới S3). Next.js giúp giảm tải Lambda cho ứng dụng web fullstack.  
+### 3. Kiến trúc giải pháp
 
-### 5. Lộ trình & Mốc triển khai  
-- *Trước thực tập (Tháng 0)*: 1 tháng lên kế hoạch và đánh giá trạm cũ.  
-- *Thực tập (Tháng 1–3)*:  
-    - Tháng 1: Học AWS và nâng cấp phần cứng.  
-    - Tháng 2: Thiết kế và điều chỉnh kiến trúc.  
-    - Tháng 3: Triển khai, kiểm thử, đưa vào sử dụng.  
-- *Sau triển khai*: Nghiên cứu thêm trong vòng 1 năm.  
+WebFood áp dụng kiến trúc serverless theo sơ đồ `docs/wedfood.drawio`, triển khai tại region **us-east-1** (yêu cầu của WAF gắn CloudFront).
 
-### 6. Ước tính ngân sách  
-Có thể xem chi phí trên [AWS Pricing Calculator](https://calculator.aws/#/estimate?id=621f38b12a1ef026842ba2ddfe46ff936ed4ab01)  
-Hoặc tải [tệp ước tính ngân sách](../attachments/budget_estimation.pdf).  
+![Kiến trúc WebFood trên AWS](/images/2-Proposal/webfood_architecture.png)
 
-*Chi phí hạ tầng*  
-- AWS Lambda: 0,00 USD/tháng (1.000 request, 512 MB lưu trữ).  
-- S3 Standard: 0,15 USD/tháng (6 GB, 2.100 request, 1 GB quét).  
-- Truyền dữ liệu: 0,02 USD/tháng (1 GB vào, 1 GB ra).  
-- AWS Amplify: 0,35 USD/tháng (256 MB, request 500 ms).  
-- Amazon API Gateway: 0,01 USD/tháng (2.000 request).  
-- AWS Glue ETL Jobs: 0,02 USD/tháng (2 DPU).  
-- AWS Glue Crawlers: 0,07 USD/tháng (1 crawler).  
-- MQTT (IoT Core): 0,08 USD/tháng (5 thiết bị, 45.000 tin nhắn).  
+*Dịch vụ AWS sử dụng*
 
-*Tổng*: 0,7 USD/tháng, 8,40 USD/12 tháng  
-- *Phần cứng*: 265 USD một lần (Raspberry Pi 5 và cảm biến).  
+| Nhóm | Dịch vụ | Vai trò |
+|------|---------|---------|
+| Edge | CloudFront, WAF, CloudFront Functions | CDN, bảo vệ, SPA routing |
+| Storage | S3 (frontend + media) | Host React build, lưu ảnh sản phẩm |
+| Compute | Lambda (5 functions) | API Express, worker email, WebSocket handlers |
+| API | API Gateway REST + WebSocket | REST `/api/*`, real-time `$connect`/`$disconnect` |
+| Database | DynamoDB | Lưu WebSocket connectionId theo userId |
+| Messaging | EventBridge, SQS + DLQ, SNS | Event bus, hàng đợi worker, cảnh báo |
+| Security | Secrets Manager, IAM, OAC | JWT/MoMo/MongoDB credentials, bucket policy |
+| Observability | CloudWatch, X-Ray | Logs, alarms, distributed tracing |
+| Email | SES | Xác nhận đơn, reset password |
 
-### 7. Đánh giá rủi ro  
-*Ma trận rủi ro*  
-- Mất mạng: Ảnh hưởng trung bình, xác suất trung bình.  
-- Hỏng cảm biến: Ảnh hưởng cao, xác suất thấp.  
-- Vượt ngân sách: Ảnh hưởng trung bình, xác suất thấp.  
+*Thiết kế thành phần*
 
-*Chiến lược giảm thiểu*  
-- Mạng: Lưu trữ cục bộ trên Raspberry Pi với Docker.  
-- Cảm biến: Kiểm tra định kỳ, dự phòng linh kiện.  
-- Chi phí: Cảnh báo ngân sách AWS, tối ưu dịch vụ.  
+- **Frontend**: React 19 + Vite, build tĩnh upload lên S3, phục vụ qua CloudFront.
+- **ApiFunction** (`webfood-api`): Bọc Express app qua `@codegenie/serverless-express`, kết nối MongoDB Atlas, publish event lên EventBridge.
+- **WorkerFunction** (`webfood-worker`): Trigger SQS, gửi email qua SES khi có `OrderCreated`, `OrderStatusChanged`, `PaymentSucceeded`.
+- **WebSocket Lambdas**: `ws-connect`/`ws-disconnect` quản lý DynamoDB; `ws-notify` nhận event từ EventBridge, push message tới client.
+- **MongoDB Atlas**: Database chính (User, Restaurant, Product, Order, Voucher, …) — nằm ngoài VPC AWS.
 
-*Kế hoạch dự phòng*  
-- Quay lại thu thập thủ công nếu AWS gặp sự cố.  
-- Sử dụng CloudFormation để khôi phục cấu hình liên quan đến chi phí.  
+### 4. Triển khai kỹ thuật
 
-### 8. Kết quả kỳ vọng  
-*Cải tiến kỹ thuật*: Dữ liệu và phân tích thời gian thực thay thế quy trình thủ công. Có thể mở rộng tới 10–15 trạm.  
-*Giá trị dài hạn*: Nền tảng dữ liệu 1 năm cho nghiên cứu AI, có thể tái sử dụng cho các dự án tương lai.
+*Các giai đoạn triển khai*
+
+1. **Phát triển local** (Tuần 4–6): React frontend + Express/Mongoose backend, auth JWT, luồng đặt hàng, tích hợp MoMo sandbox.
+2. **Thiết kế kiến trúc AWS** (Tuần 7–8): Vẽ sơ đồ `wedfood.drawio`, viết SAM template (`infra/template.yaml`), chuẩn hóa Lambda handlers.
+3. **Deploy AWS** (Tuần 9–10): Triển khai thủ công trên Console theo `DEPLOY_CONSOLE.md` (hoặc `sam deploy`) — Secrets Manager, S3, Lambda, API Gateway, CloudFront.
+4. **Kiểm thử & tối ưu** (Tuần 11–12): Smoke test end-to-end, bật X-Ray, CloudWatch alarms, cập nhật biến môi trường CloudFront/MoMo.
+
+*Yêu cầu kỹ thuật*
+
+- **Local**: Node.js 20+, MongoDB, npm cho `backend/` và `frontend/`.
+- **AWS**: Tài khoản với quyền tạo Lambda, API Gateway, S3, CloudFront, WAF, EventBridge, DynamoDB, SQS, SES.
+- **Bên thứ ba**: MongoDB Atlas cluster, tài khoản MoMo Test, email đã verify trong SES.
+- **IaC**: AWS SAM (`template.yaml`) hoặc click-ops Console cho mục đích báo cáo workshop.
+
+### 5. Lộ trình & Mốc triển khai
+
+| Giai đoạn | Thời gian | Mốc chính |
+|-----------|-----------|-----------|
+| Học AWS cơ bản | Tuần 1–3 (17/04 – 08/05/2026) | Free Tier, EC2, S3, VPC, IAM, CLI |
+| Dev WebFood local | Tuần 4–8 (11/05 – 12/06/2026) | Học thêm Lightsail, ELB, CloudWatch; thiết kế WebFood |
+| Thiết kế serverless | Tuần 8–9 (08/06 – 19/06/2026) | `wedfood.drawio`, SAM template, Lambda adapter |
+| Deploy production | Tuần 9–10 (15/06 – 26/06/2026) | Deploy Console, CloudFront live |
+| Kiểm thử & báo cáo | Tuần 11–14 (29/06 – 30/07/2026) | Smoke test, workshop doc, Hugo site |
+
+### 6. Ước tính ngân sách
+
+Chi tiết ước tính chi phí hàng tháng cho workload demo (~10.000 request API, ~5 GB CloudFront transfer):
+
+| Dịch vụ | Chi phí ước tính/tháng |
+|---------|------------------------|
+| AWS Lambda (5 functions) | ~1,50 USD |
+| API Gateway REST + WebSocket | ~2,00 USD |
+| Amazon CloudFront | ~2,50 USD |
+| Amazon S3 (frontend + media) | ~0,50 USD |
+| DynamoDB (on-demand) | ~0,25 USD |
+| EventBridge + SQS | ~0,10 USD |
+| AWS WAF | ~5,00 USD |
+| Amazon SES | ~0,10 USD |
+| Secrets Manager | ~0,40 USD |
+| **Tổng** | **~12,35 USD/tháng** (~148 USD/năm) |
+
+Xem chi tiết trên [AWS Pricing Calculator](https://calculator.aws/#/estimate?id=webfood-serverless-estimate).
+
+Hoặc tải [tệp ước tính ngân sách](../attachments/budget_estimation.pdf).
+
+### 7. Đánh giá rủi ro
+
+*Ma trận rủi ro*
+
+| Rủi ro | Ảnh hưởng | Xác suất |
+|--------|-----------|----------|
+| Cold start Lambda | Trung bình | Trung bình |
+| MongoDB Atlas mất kết nối | Cao | Thấp |
+| MoMo sandbox không phản hồi | Trung bình | Thấp |
+| Chi phí WAF/CloudFront vượt Free Tier | Trung bình | Trung bình |
+| Zip Lambda > 50 MB (node_modules) | Trung bình | Trung bình |
+
+*Chiến lược giảm thiểu*
+
+- Provisioned concurrency cho `webfood-api` nếu cần (production).
+- MongoDB Atlas: whitelist IP, monitoring connection pool.
+- CloudWatch billing alarm + SNS notification.
+- `npm install --omit=dev` khi đóng gói Lambda; upload qua S3 nếu zip lớn.
+
+*Kế hoạch dự phòng*
+
+- Fallback chạy local (Express + MongoDB) khi AWS gặp sự cố trong giai đoạn demo.
+- SAM template (`infra/template.yaml`) để tái tạo stack nhanh sau teardown.
+
+### 8. Kết quả kỳ vọng
+
+*Cải tiến kỹ thuật*
+
+- Luồng đặt hàng end-to-end: khách đặt món → API Lambda → EventBridge → email SES + WebSocket toast voucher.
+- Quản trị tập trung: admin duyệt nhà hàng, merchant cập nhật menu, khách theo dõi đơn real-time.
+- Kiến trúc có thể mở rộng: thêm event type mới trên EventBridge mà không refactor API.
+
+*Giá trị dài hạn*
+
+- Nền tảng tham chiếu cho các dự án e-commerce serverless trên AWS.
+- Kinh nghiệm thực hành đầy đủ: IaC (SAM), event-driven, CDN, WebSocket, observability.
+- Có thể mở rộng sang production với Cognito auth, CI/CD pipeline và multi-region.

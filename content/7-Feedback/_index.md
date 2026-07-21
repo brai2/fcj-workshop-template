@@ -6,42 +6,60 @@ chapter: false
 pre: " <b> 7. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your report, including this warning.
-{{% /notice %}}
-
-> Here, you can freely share your personal opinions about your experience participating in the First Cloud AI Journey program. This will help the FCAJ team improve any shortcomings based on the following aspects:
+Below are my personal reflections on participating in the **First Cloud AI Journey (FCAJ)** program at AWS Viet Nam, shared to help the program team improve future cohorts.
 
 ### Overall Evaluation
 
 **1. Working Environment**  
-The working environment is very friendly and open. FCAJ members are always willing to help whenever I encounter difficulties, even outside working hours. The workspace is tidy and comfortable, helping me focus better. However, I think it would be nice to have more social gatherings or team bonding activities to strengthen relationships.
+The program provides an open learning environment that encourages self-learning and hands-on practice on AWS. Communication between interns and mentors is friendly, making it easy to ask questions when difficulties arise. I especially appreciate the structured learning path and the chance to work on a real project instead of only following sample labs.
 
 **2. Support from Mentor / Team Admin**  
-The mentor provides very detailed guidance, explains clearly when I don’t understand, and always encourages me to ask questions. The admin team supports administrative tasks, provides necessary documents, and creates favorable conditions for me to work effectively. I especially appreciate that the mentor allows me to try and solve problems myself instead of just giving the answer.
+Mentors explain clearly when I do not understand something, while still encouraging me to try and fix issues myself before giving the answer. Program materials and the Hugo report template gave me a clear structure for completing the Worklog, Proposal, and Workshop. The admin team also kept procedures and timelines stable throughout the internship.
 
 **3. Relevance of Work to Academic Major**  
-The tasks I was assigned align well with the knowledge I learned at university, while also introducing me to new areas I had never encountered before. This allowed me to both strengthen my foundational knowledge and gain practical skills.
+As an **Information Technology** student, I already had a basic programming foundation. FCAJ helped me connect software knowledge with AWS cloud infrastructure — from compute, storage, and networking to security and monitoring. This complements my major and supports a career path related to cloud / backend roles.
 
 **4. Learning & Skill Development Opportunities**  
-During the internship, I learned many new skills such as using project management tools, teamwork skills, and professional communication in a corporate environment. The mentor also shared valuable real-world experiences that helped me better plan my career path.
+During the internship, I gained several new skills:
+
+- Working with common AWS services through the Console
+- Designing and presenting cloud architecture for a real project
+- Writing technical documentation (Proposal, Workshop, weekly Worklog)
+- Managing Free Tier cost and tearing down resources after demos
+- Sharing through Study Group blogs and events
+
+These are practical experiences that are hard to get from classroom theory alone.
 
 **5. Company Culture & Team Spirit**  
-The company culture is very positive: everyone respects each other, works seriously but still keeps things enjoyable. When there are urgent projects, everyone works together and supports one another regardless of their position. This made me feel like a real part of the team, even as an intern.
+FCAJ’s learning culture is positive: people are willing to share experiences, blogs, and events. The “learn by doing” spirit fits the program’s goals and helps interns feel part of a community, even during a short internship period.
 
 **6. Internship Policies / Benefits**  
-The company provides an internship allowance and offers flexible working hours when needed. In addition, having the opportunity to join internal training sessions is a big plus.
-
----
+The program offers a structured AWS learning path (from fundamentals to a project), sample materials, and mentor support. Being able to practice on an AWS account and finish a product/report at the end of the internship is a major benefit for interns.
 
 ### Additional Questions
-- What did you find **most satisfying** during your internship?  
-- What do you think the company **should improve** for future interns?  
-- If recommending to a friend, would you **suggest they intern here**? Why or why not?  
 
----
+**What did you find most satisfying during your internship?**  
+I was most satisfied when I could deploy an architecture on AWS end-to-end and see the system actually run after the configuration steps. That moment made the value of what I learned in the program concrete.
+
+**What do you think the program should improve for future interns?**  
+
+- Add **IaC guidance (SAM/CloudFormation)** alongside click-ops so environments are easier to recreate.
+- Provide a clearer cost / teardown checklist from the start to avoid unexpected charges.
+- Offer more deep-dive sessions on observability and security (IAM, WAF, CloudWatch).
+
+**If recommending to a friend, would you suggest they intern here? Why or why not?**  
+**Yes.** FCAJ suits students who want hands-on AWS experience, mentor support, and a concrete product/report after the internship. I would recommend it to friends interested in cloud or backend roles.
 
 ### Suggestions & Expectations
-- Do you have any suggestions to improve the internship experience?  
-- Would you like to continue this program in the future?  
-- Any other comments (free sharing):
+
+**Do you have any suggestions to improve the internship experience?**  
+
+- Add a short workshop on **CI/CD** after interns are familiar with manual deployment.
+- Standardize deploy / teardown checklists so interns spend less time debugging configuration issues.
+- Organize peer reviews across teams to learn from each other’s projects.
+
+**Would you like to continue this program in the future?**  
+Yes. I want to keep deepening my knowledge of AWS services and apply them to more real-world projects later.
+
+**Any other comments**  
+Thank you to the FCAJ team and AWS Viet Nam for enabling hands-on learning. This internship made me more confident working with cloud and clarified my career direction after graduation.

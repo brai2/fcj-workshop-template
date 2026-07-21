@@ -1,126 +1,91 @@
 ---
-title: "Event 2"
-date: 2024-01-01
-weight: 1
+title: "FCAJ AI Meetup (06/06/2026)"
+date: 2026-06-06
+weight: 2
 chapter: false
 pre: " <b> 4.2. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy it verbatim** into your report, including this warning.
-{{% /notice %}}
+# Meetup 06/06/2026 Report — First Cloud Journey AI
 
-# Summary Report: “GenAI-powered App-DB Modernization workshop”
+### Event purpose
 
-### Event Objectives
+- Share practical knowledge from the First Cloud Journey AI community
+- Cover Cloud, DevOps, security, multiplayer gaming, and soft skills
+- Learn career pathways and effective teamwork practices
 
-- Share best practices in modern application design
-- Introduce Domain-Driven Design (DDD) and event-driven architecture
-- Provide guidance on selecting the right compute services
-- Present AI tools to support the development lifecycle
+### Event details
 
-### Speakers
+- **Event name:** First Cloud Journey AI Meetup (06/06/2026)
+- **Date:** **June 6, 2026**
+- **Location:** 26th Floor — AWS Vietnam Office (Bitexco Tower, 2 Hai Trieu Street, Saigon Ward, Ho Chi Minh City)
+- **Role:** Attendee
+- **Slide source:** [Meetup Google Drive folder](https://drive.google.com/drive/folders/1EgyIOIjUsgAMugJDcKKQy-AYbWkrHrLX)
 
-- **Jignesh Shah** – Director, Open Source Databases
-- **Erica Liu** – Sr. GTM Specialist, AppMod
-- **Fabrianne Effendi** – Assc. Specialist SA, Serverless Amazon Web Services
+### Speakers & opening slides
 
-### Key Highlights
+Below is the **first slide** from each speaker’s deck.
 
-#### Identifying the drawbacks of legacy application architecture
+#### 1. Bảo Huỳnh — Docker: A containerization technology
 
-- Long product release cycles → Lost revenue/missed opportunities  
-- Inefficient operations → Reduced productivity, higher costs  
-- Non-compliance with security regulations → Security breaches, loss of reputation  
+- Junior Cloud Native Developer (Endava Vietnam), Founder / Head Lab (ITea Lab)
+- Introduces Docker as a foundation for Cloud Native and DevOps workflows
 
-#### Transitioning to modern application architecture – Microservices
+![Opening slide — Bảo Huỳnh](/images/4-EventParticipated/4.2-Event2/bao-huynh-slide1.png)
 
-Migrating to a modular system — each function is an **independent service** communicating via **events**, built on three core pillars:
+#### 2. Lê Hoàng Gia Đại — WAF + ML for Cyber Attack Detection
 
-- **Queue Management**: Handle asynchronous tasks  
-- **Caching Strategy**: Optimize performance  
-- **Message Handling**: Flexible inter-service communication  
+- AWS G3 — Machine Learning-based Network Intrusion Detection System (NIDS) on AWS
+- Combines AWS WAF with Machine Learning for cyber attack detection
 
-#### Domain-Driven Design (DDD)
+![Opening slide — Lê Hoàng Gia Đại](/images/4-EventParticipated/4.2-Event2/le-hoang-gia-dai-slide1.png)
 
-- **Four-step method**: Identify domain events → arrange timeline → identify actors → define bounded contexts  
-- **Bookstore case study**: Demonstrates real-world DDD application  
-- **Context mapping**: 7 patterns for integrating bounded contexts  
+#### 3. Nguyễn Quốc Bảo — Multiplayer in the Cloud
 
-#### Event-Driven Architecture
+- Connects Godot clients to AWS WebSockets (Lambda, DynamoDB)
+- Demonstrates a realtime multiplayer architecture on AWS
 
-- **3 integration patterns**: Publish/Subscribe, Point-to-point, Streaming  
-- **Benefits**: Loose coupling, scalability, resilience  
-- **Sync vs async comparison**: Understanding the trade-offs  
+![Opening slide — Nguyễn Quốc Bảo](/images/4-EventParticipated/4.2-Event2/nguyen-quoc-bao-slide1.png)
 
-#### Compute Evolution
+#### 4. Trương Phước — The Art of Effective Teamwork
 
-- **Shared Responsibility Model**: EC2 → ECS → Fargate → Lambda  
-- **Serverless benefits**: No server management, auto-scaling, pay-for-value  
-- **Functions vs Containers**: Criteria for appropriate choice  
+- Soft skills session on effective teamwork (“Many hands make light work”)
+- Balances the technical talks with collaboration practices
 
-#### Amazon Q Developer
+![Opening slide — Trương Phước](/images/4-EventParticipated/4.2-Event2/truong-phuoc-slide1.png)
 
-- **SDLC automation**: From planning to maintenance  
-- **Code transformation**: Java upgrade, .NET modernization  
-- **AWS Transform agents**: VMware, Mainframe, .NET migration  
+#### 5. Việt Phát — GraphRAG with Amazon Bedrock & Amazon Neptune
 
-### Key Takeaways
+- Builds a graph knowledge base / GraphRAG on Amazon Neptune and Bedrock
+- Explores graph-based RAG beyond pure vector retrieval
 
-#### Design Mindset
+![Opening slide — Việt Phát](/images/4-EventParticipated/4.2-Event2/viet-phat-slide1.png)
 
-- **Business-first approach**: Always start from the business domain, not the technology  
-- **Ubiquitous language**: Importance of a shared vocabulary between business and tech teams  
-- **Bounded contexts**: Identifying and managing complexity in large systems  
+#### 6. Vinh Trần — From IT Helpdesk to Senior Sysadmin
 
-#### Technical Architecture
+- System Administrator at Central Retail Group
+- Shares a self-learning journey and a path toward Cloud / DevOps
 
-- **Event storming technique**: Practical method for modeling business processes  
-- Use **event-driven communication** instead of synchronous calls  
-- **Integration patterns**: When to use sync, async, pub/sub, streaming  
-- **Compute spectrum**: Criteria for choosing between VM, containers, and serverless  
+![Opening slide — Vinh Trần](/images/4-EventParticipated/4.2-Event2/vinh-tran-slide1.png)
 
-#### Modernization Strategy
+### Highlights
 
-- **Phased approach**: No rushing — follow a clear roadmap  
-- **7Rs framework**: Multiple modernization paths depending on the application  
-- **ROI measurement**: Cost reduction + business agility  
+- **Containers & Cloud Native:** Docker packages apps consistently across local and cloud environments.
+- **Security on AWS:** WAF + ML/NIDS goes beyond static rules for attack detection.
+- **Realtime on AWS:** WebSocket + Lambda + DynamoDB fits multiplayer / realtime updates (relevant to WebFood WebSocket).
+- **GraphRAG:** Neptune + Bedrock for graph knowledge, complementary to vector RAG.
+- **Career & soft skills:** Helpdesk → Sysadmin → Cloud/DevOps; teamwork alongside technical depth.
 
-### Applying to Work
+### Takeaways & application
 
-- **Apply DDD** to current projects: Event storming sessions with business teams  
-- **Refactor microservices**: Use bounded contexts to define service boundaries  
-- **Implement event-driven patterns**: Replace some sync calls with async messaging  
-- **Adopt serverless**: Pilot AWS Lambda for suitable use cases  
-- **Try Amazon Q Developer**: Integrate into the dev workflow to boost productivity  
+- Better understanding of **containers** compared with the serverless model used in **WebFood**.
+- Connecting WebFood’s **WAF** layer with ML-based detection ideas.
+- Reinforcing **API Gateway WebSocket** knowledge via the Godot multiplayer case.
+- Extra context on **GraphRAG / Neptune** for AWS AI experiments and blogs.
+- Practical framing for career storytelling and teamwork during the internship.
 
-### Event Experience
+### Experience
 
-Attending the **“GenAI-powered App-DB Modernization”** workshop was extremely valuable, giving me a comprehensive view of modernizing applications and databases using advanced methods and tools. Key experiences included:
+The meetup felt community-driven: deep technical talks (WAF+ML, GraphRAG, WebSocket) alongside soft skills and career stories. Reviewing each speaker’s opening slide made it easy to grasp the “hook” of every session.
 
-#### Learning from highly skilled speakers
-- Experts from AWS and major tech organizations shared **best practices** in modern application design.  
-- Through real-world case studies, I gained a deeper understanding of applying **DDD** and **Event-Driven Architecture** to large projects.  
-
-#### Hands-on technical exposure
-- Participating in **event storming** sessions helped me visualize how to **model business processes** into domain events.  
-- Learned how to **split microservices** and define **bounded contexts** to manage large-system complexity.  
-- Understood trade-offs between **synchronous and asynchronous communication** and integration patterns like **pub/sub, point-to-point, streaming**.  
-
-#### Leveraging modern tools
-- Explored **Amazon Q Developer**, an AI tool for SDLC support from planning to maintenance.  
-- Learned to **automate code transformation** and pilot serverless with **AWS Lambda** to improve productivity.  
-
-#### Networking and discussions
-- The workshop offered opportunities to exchange ideas with experts, peers, and business teams, enhancing the **ubiquitous language** between business and tech.  
-- Real-world examples reinforced the importance of the **business-first approach** rather than focusing solely on technology.  
-
-#### Lessons learned
-- Applying DDD and event-driven patterns reduces **coupling** while improving **scalability** and **resilience**.  
-- Modernization requires a **phased approach** with **ROI measurement**; rushing the process can be risky.  
-- AI tools like Amazon Q Developer can significantly **boost productivity** when integrated into the current workflow.  
-
-#### Some event photos
-*Add your event photos here*  
-
-> Overall, the event not only provided technical knowledge but also helped me reshape my thinking about application design, system modernization, and cross-team collaboration.
+> Overall, Meetup 06/06 broadened my Cloud/AI perspective beyond the WebFood serverless lab and connected me with the First Cloud Journey AI community.

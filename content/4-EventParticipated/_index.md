@@ -6,39 +6,38 @@ chapter: false
 pre: " <b> 4. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy it verbatim** for your report, including this warning.
-{{% /notice %}}
+During my internship in the **First Cloud AI Journey (FCAJ)** program at AWS Vietnam, I attended **two community events** at the AWS office (26th Floor, Bitexco Tower). Each session expanded my Cloud/AI knowledge, soft skills, and connection with the learner community.
 
-> In this section, you should list and describe in detail the events you have participated in during your internship or work experience.  
-> 
-> Each event should be presented in the format Event 1, Event 2, Event 3…, along with the following details:
-> * Event name
-> * Date and time
-> * Location (if applicable)
-> * Your role in the event (attendee, event support, speaker, etc.)
-> * A brief description of the event’s content and main activities
-> * Outcomes or value gained (lessons learned, new skills, contribution to the team/project)
-> * This listing helps demonstrate your actual participation as well as the soft skills and experience you have gained from each event.
+### [Event 1 — AWS Community Day (30/05/2026)](4.1-Event1/)
 
-During my internship, I participated in two events. Each one was a memorable experience that provided new, interesting, and useful knowledge, along with gifts and wonderful moments.
+**Event name:** AWS Community Day — First Cloud Journey AI  
 
-### [Event 1](4.1-Event1/)  
-&emsp;**Event Name:** GenAI-powered App-DB Modernization workshop  
+**Date:** May 30, 2026  
 
-&emsp;**Date & Time:** 09:00, August 13, 2025  
+**Location:** 26th Floor — AWS Vietnam Office (Bitexco Tower, 2 Hai Trieu Street, Saigon Ward, Ho Chi Minh City)  
 
-&emsp;**Location:** 26th Floor, Bitexco Tower, 02 Hai Trieu Street, Saigon Ward, Ho Chi Minh City  
+**Role:** Attendee  
 
-&emsp;**Role:** Attendee  
+**Highlights:** Sessions on AWS Cloud Quest & Floci, hackathon demo **SynthHunter**, soft skills (confidence, procrastination), a community product (Tử vi Đại Việt), and DevOps thinking (*DevOps Before Disaster*).  
+
+**Takeaways:** Stronger AWS learning path and cost awareness on a real account, clearer ways to present AI/hackathon projects, and soft skills that support the internship and **WebFood** deployment.
+
+→ [Read the full Event 1 report](4.1-Event1/)
 
 ---
 
-### [Event 2](4.2-Event2/)  
-&emsp;**Event Name:** GenAI-powered App-DB Modernization workshop  
+### [Event 2 — First Cloud Journey AI Meetup (06/06/2026)](4.2-Event2/)
 
-&emsp;**Date & Time:** 09:00, August 13, 2025  
+**Event name:** First Cloud Journey AI Meetup  
 
-&emsp;**Location:** 26th Floor, Bitexco Tower, 02 Hai Trieu Street, Saigon Ward, Ho Chi Minh City  
+**Date:** June 6, 2026  
 
-&emsp;**Role:** Attendee  
+**Location:** 26th Floor — AWS Vietnam Office (Bitexco Tower, 2 Hai Trieu Street, Saigon Ward, Ho Chi Minh City)  
+
+**Role:** Attendee  
+
+**Highlights:** Six talks covering Docker/containerization, AWS WAF + Machine Learning (NIDS), realtime multiplayer with Godot + AWS WebSockets, GraphRAG on Amazon Neptune & Bedrock, effective teamwork, and a career path from Helpdesk → Sysadmin → Cloud/DevOps.  
+
+**Takeaways:** Direct links to the **WebFood** architecture (WAF, WebSocket, serverless), plus broader context on containers, security, GraphRAG, and Cloud career planning.
+
+→ [Read the full Event 2 report](4.2-Event2/)

@@ -1,125 +1,80 @@
 ---
-title: "Event 1"
-date: 2024-01-01
+title: "Community Day AWS (30/05/2026)"
+date: 2026-05-30
 weight: 1
 chapter: false
 pre: " <b> 4.1. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
+# Bài thu hoạch Community Day AWS — 30/05/2026
 
-# Bài thu hoạch “GenAI-powered App-DB Modernization workshop”
+### Mục đích của sự kiện
 
-### Mục Đích Của Sự Kiện
+- Chia sẻ kiến thức AWS, AI và soft skills trong cộng đồng **First Cloud Journey / FCAJ**
+- Demo các dự án hackathon và sản phẩm của challenger
+- Kết nối học viên tại văn phòng AWS Việt Nam
 
-- Chia sẻ best practices trong thiết kế ứng dụng hiện đại
-- Giới thiệu phương pháp DDD và event-driven architecture
-- Hướng dẫn lựa chọn compute services phù hợp
-- Giới thiệu công cụ AI hỗ trợ development lifecycle
+### Thông tin sự kiện
 
-### Danh Sách Diễn Giả
+- **Tên sự kiện:** Community Day AWS (Event CD AWS) — First Cloud Journey AI
+- **Thời gian:** ngày **30/05/2026**
+- **Địa điểm:** Tầng 26 - Văn phòng AWS Việt Nam (Tòa nhà Bitexco, Số 2 Hải Triều, Phường Sài Gòn, TP.HCM)
+- **Vai trò:** Người tham dự
+- **Ảnh sự kiện:** [Thư mục Google Drive](https://drive.google.com/drive/folders/15tJn3pkEWgCqcvF6A7cUhMMsNM6Qt0zo)
 
-- **Jignesh Shah** - Director, Open Source Databases
-- **Erica Liu** - Sr. GTM Specialist, AppMod
-- **Fabrianne Effendi** - Assc. Specialist SA, Serverless Amazon Web Services
+### Danh sách diễn giả / phiên trình bày
 
-### Nội Dung Nổi Bật
+#### 1. Huỳnh Thái Linh — Cloud Quest & Floci
 
-#### Đưa ra các ảnh hưởng tiêu cực của kiến trúc ứng dụng cũ
+*Level Up Your AWS Skills with Cloud Quest and Floci* — học AWS qua Cloud Quest, quản lý billing, và so sánh công cụ mô phỏng local (Floci vs LocalStack).
 
-- Thời gian release sản phẩm lâu → Mất doanh thu/bỏ lỡ cơ hội
-- Hoạt động kém hiệu quả → Mất năng suất, tốn kém chi phí
-- Không tuân thủ các quy định về bảo mật → Mất an ninh, uy tín
+![Huỳnh Thái Linh — Cloud Quest & Floci](/images/4-EventParticipated/4.1-Event1/01-huynh-thai-linh.jpg)
 
-#### Chuyển đổi sang kiến trúc ứng dụng mới - Microservice Architecture
+#### 2. Team The Ballers (FCAJ Challenger) — Hackathon & SynthHunter
 
-Chuyển đổi thành hệ thống modular – từng chức năng là một **dịch vụ độc lập** giao tiếp với nhau qua **sự kiện** với 3 trụ cột cốt lõi:
+**Huỳnh Anh Khương, Mai Quốc Anh, Nguyễn Trần Minh Quân** chia sẻ trải nghiệm hackathon và demo dự án **SynthHunter** — hệ thống phân loại giọng nói HUMAN / AI GENERATED / NEEDS REVIEW (XLS-R, Whisper, Fourier).
 
-- **Queue Management**: Xử lý tác vụ bất đồng bộ
-- **Caching Strategy:** Tối ưu performance
-- **Message Handling:** Giao tiếp linh hoạt giữa services
+![The Ballers — Hackathon](/images/4-EventParticipated/4.1-Event1/02-the-ballers-hackathon.jpg)
 
-#### Domain-Driven Design (DDD)
+![SynthHunter — AI Voice Verification](/images/4-EventParticipated/4.1-Event1/03-synthhunter.jpg)
 
-- **Phương pháp 4 bước**: Xác định domain events → sắp xếp timeline → identify actors → xác định bounded contexts
-- **Case study bookstore**: Minh họa cách áp dụng DDD thực tế
-- **Context mapping**: 7 patterns tích hợp bounded contexts
+#### 3. Nguyễn Thị Quỳnh Như — Why We Always Need Confidence
 
-#### Event-Driven Architecture
+Soft skills: vì sao sự tự tin là “must-have” cho career, campus life; agenda gồm self-doubt, science behind the struggle, và cách “hack” confidence hàng ngày.
 
-- **3 patterns tích hợp**: Publish/Subscribe, Point-to-point, Streaming
-- **Lợi ích**: Loose coupling, scalability, resilience
-- **So sánh sync vs async**: Hiểu rõ trade-offs (sự đánh đổi)
+![Nguyễn Thị Quỳnh Như — Confidence](/images/4-EventParticipated/4.1-Event1/04-quynh-nhu-confidence.jpg)
 
-#### Compute Evolution
+#### 4. Nghĩa Trần — Tử vi Đại Việt
 
-- **Shared Responsibility Model**: Từ EC2 → ECS → Fargate → Lambda
-- **Serverless benefits**: No server management, auto-scaling, pay-for-value
-- **Functions vs Containers**: Criteria lựa chọn phù hợp
+Giới thiệu sản phẩm / ý tưởng **Tử vi Đại Việt** (giải mã vận mệnh, thấu hiểu bản ngã), kèm góc nhìn GenAI và vision/differentiation của sản phẩm.
 
-#### Amazon Q Developer
+![Nghĩa Trần — Tử vi Đại Việt](/images/4-EventParticipated/4.1-Event1/05-nghia-tran-tuvi.jpg)
 
-- **SDLC automation**: Từ planning đến maintenance
-- **Code transformation**: Java upgrade, .NET modernization
-- **AWS Transform agents**: VMware, Mainframe, .NET migration
+#### 5. Trần Minh Quân — The Hidden Iceberg of a Project: DevOps Before Disaster
 
-### Những Gì Học Được
+Chia sẻ về “tảng băng chìm” của dự án: tư duy **DevOps trước khi sự cố xảy ra** — nhìn rủi ro vận hành, delivery và cộng tác sớm thay vì chỉ xử lý khi đã “disaster”.
 
-#### Tư Duy Thiết Kế
+![Trần Minh Quân — DevOps Before Disaster](/images/4-EventParticipated/4.1-Event1/06-tran-minh-quan-devops.jpg)
 
-- **Business-first approach**: Luôn bắt đầu từ business domain, không phải technology
-- **Ubiquitous language**: Importance của common vocabulary giữa business và tech teams
-- **Bounded contexts**: Cách identify và manage complexity trong large systems
+#### 6. Khac Uy Pham (HGU) — Procrastination
 
-#### Kiến Trúc Kỹ Thuật
+*A Familiar Enemy / The Iceberg of Procrastination* — nhìn trì hoãn như sợ hãi (không phải lười), và thông điệp “GO BUILD — Starting today”.
 
-- **Event storming technique**: Phương pháp thực tế để mô hình hóa quy trình kinh doanh
-- Sử dụng **Event-driven communication** thay vì synchronous calls
-- **Integration patterns**: Hiểu khi nào dùng sync, async, pub/sub, streaming
-- **Compute spectrum**: Criteria chọn từ VM → containers → serverless
+![Khac Uy Pham — Procrastination](/images/4-EventParticipated/4.1-Event1/07-khac-uy-pham-procrastination.jpg)
 
-#### Chiến Lược Hiện Đại Hóa
+#### Ảnh tập thể
 
-- **Phased approach**: Không rush, phải có roadmap rõ ràng
-- **7Rs framework**: Nhiều con đường khác nhau tùy thuộc vào đặc điểm của mỗi ứng dụng
-- **ROI measurement**: Cost reduction + business agility
+![Ảnh tập thể Community Day](/images/4-EventParticipated/4.1-Event1/08-group-photo.jpg)
 
-### Ứng Dụng Vào Công Việc
+### Những gì học được & ứng dụng
 
-- **Áp dụng DDD** cho project hiện tại: Event storming sessions với business team
-- **Refactor microservices**: Sử dụng bounded contexts để identify service boundaries
-- **Implement event-driven patterns**: Thay thế một số sync calls bằng async messaging
-- **Serverless adoption**: Pilot AWS Lambda cho một số use cases phù hợp
-- **Try Amazon Q Developer**: Integrate vào development workflow để boost productivity
+- **AWS learning path:** Cloud Quest + chú ý billing khi thực hành trên account thật (liên quan deploy **WebFood**).
+- **Hackathon & AI project:** cách đóng gói problem–solution (SynthHunter) và làm việc nhóm dưới áp lực thời gian.
+- **Soft skills:** confidence và chống procrastination — hữu ích khi làm project dài hơi trong thực tập.
+- **Product / DevOps thinking:** nhìn “hidden iceberg” của dự án sớm (DevOps before disaster), không đợi tới khi sự cố mới xử lý.
 
 ### Trải nghiệm trong event
 
-Tham gia workshop **“GenAI-powered App-DB Modernization”** là một trải nghiệm rất bổ ích, giúp tôi có cái nhìn toàn diện về cách hiện đại hóa ứng dụng và cơ sở dữ liệu bằng các phương pháp và công cụ hiện đại. Một số trải nghiệm nổi bật:
+Community Day có nhiều phiên đa dạng: kỹ thuật AWS, demo hackathon/AI, sản phẩm cộng đồng, và soft skills. Không khí văn phòng AWS Bitexco + áo First Cloud Journey tạo cảm giác cộng đồng rõ nét.
 
-#### Học hỏi từ các diễn giả có chuyên môn cao
-- Các diễn giả đến từ AWS và các tổ chức công nghệ lớn đã chia sẻ **best practices** trong thiết kế ứng dụng hiện đại.
-- Qua các case study thực tế, tôi hiểu rõ hơn cách áp dụng **Domain-Driven Design (DDD)** và **Event-Driven Architecture** vào các project lớn.
-
-#### Trải nghiệm kỹ thuật thực tế
-- Tham gia các phiên trình bày về **event storming** giúp tôi hình dung cách **mô hình hóa quy trình kinh doanh** thành các domain events.
-- Học cách **phân tách microservices** và xác định **bounded contexts** để quản lý sự phức tạp của hệ thống lớn.
-- Hiểu rõ trade-offs giữa **synchronous và asynchronous communication** cũng như các pattern tích hợp như **pub/sub, point-to-point, streaming**.
-
-#### Ứng dụng công cụ hiện đại
-- Trực tiếp tìm hiểu về **Amazon Q Developer**, công cụ AI hỗ trợ SDLC từ lập kế hoạch đến maintenance.
-- Học cách **tự động hóa code transformation** và pilot serverless với **AWS Lambda**, từ đó nâng cao năng suất phát triển.
-
-#### Kết nối và trao đổi
-- Workshop tạo cơ hội trao đổi trực tiếp với các chuyên gia, đồng nghiệp và team business, giúp **nâng cao ngôn ngữ chung (ubiquitous language)** giữa business và tech.
-- Qua các ví dụ thực tế, tôi nhận ra tầm quan trọng của **business-first approach**, luôn bắt đầu từ nhu cầu kinh doanh thay vì chỉ tập trung vào công nghệ.
-
-#### Bài học rút ra
-- Việc áp dụng DDD và event-driven patterns giúp giảm **coupling**, tăng **scalability** và **resilience** cho hệ thống.
-- Chiến lược hiện đại hóa cần **phased approach** và đo lường **ROI**, không nên vội vàng chuyển đổi toàn bộ hệ thống.
-- Các công cụ AI như Amazon Q Developer có thể **boost productivity** nếu được tích hợp vào workflow phát triển hiện tại.
-
-#### Một số hình ảnh khi tham gia sự kiện
-* Thêm các hình ảnh của các bạn tại đây
-> Tổng thể, sự kiện không chỉ cung cấp kiến thức kỹ thuật mà còn giúp tôi thay đổi cách tư duy về thiết kế ứng dụng, hiện đại hóa hệ thống và phối hợp hiệu quả hơn giữa các team.
+> Tổng thể, Event 1 giúp em mở rộng góc nhìn ngoài lab serverless — từ học AWS, làm dự án AI, đến tư duy sản phẩm và kỹ năng mềm.
