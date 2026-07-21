@@ -6,6 +6,14 @@ chapter : false
 pre : " <b> 5.1. </b> "
 ---
 
+#### Demo dự án đã triển khai
+
+Người đánh giá có thể truy cập trực tiếp hệ thống WebFood tại:
+
+**[https://dh9xhc3jrccu4.cloudfront.net/](https://dh9xhc3jrccu4.cloudfront.net/)**
+
+Link này là CloudFront distribution của dự án (frontend + API) sau khi hoàn thành các bước workshop.
+
 #### Mục tiêu workshop
 
 Sau khi hoàn thành workshop, bạn sẽ:

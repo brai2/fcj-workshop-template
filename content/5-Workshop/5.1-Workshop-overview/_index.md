@@ -6,6 +6,14 @@ chapter : false
 pre : " <b> 5.1. </b> "
 ---
 
+#### Live deployed demo
+
+Reviewers can open the running WebFood system at:
+
+**[https://dh9xhc3jrccu4.cloudfront.net/](https://dh9xhc3jrccu4.cloudfront.net/)**
+
+This is the CloudFront distribution for the project (frontend + API) after completing the workshop steps.
+
 #### Workshop Objectives
 
 After completing this workshop, you will:

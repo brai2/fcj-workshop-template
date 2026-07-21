@@ -8,6 +8,8 @@ pre: " <b> 2. </b> "
 
 In this section, I present the workshop proposal for **WebFood** — an online food ordering platform deployed on AWS Serverless architecture.
 
+> **Live demo:** [https://dh9xhc3jrccu4.cloudfront.net/](https://dh9xhc3jrccu4.cloudfront.net/)
+
 # WebFood — Online Food Ordering Platform
 ## AWS Serverless Solution for F&B E-Commerce
 

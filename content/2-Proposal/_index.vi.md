@@ -8,6 +8,8 @@ pre: " <b> 2. </b> "
 
 Tại phần này, tôi trình bày bản đề xuất workshop **WebFood** — nền tảng đặt đồ ăn trực tuyến triển khai trên kiến trúc AWS Serverless.
 
+> **Demo trực tiếp:** [https://dh9xhc3jrccu4.cloudfront.net/](https://dh9xhc3jrccu4.cloudfront.net/)
+
 # WebFood — Nền tảng đặt đồ ăn trực tuyến
 ## Giải pháp AWS Serverless cho thương mại điện tử F&B
 

@@ -10,6 +10,9 @@ pre: " <b> 5. </b> "
 
 Workshop hướng dẫn triển khai **toàn bộ** kiến trúc WebFood trên AWS Management Console (click-ops), có screenshot minh họa từng bước. Các mục được nhóm theo **chức năng** để dễ theo dõi và không bỏ sót bước.
 
+> **Demo trực tiếp (để đánh giá):** [https://dh9xhc3jrccu4.cloudfront.net/](https://dh9xhc3jrccu4.cloudfront.net/)  
+> Người đánh giá có thể mở link này để xem và trải nghiệm hệ thống WebFood đã triển khai trên AWS.
+
 > Region bắt buộc: **us-east-1** (WAF gắn CloudFront chỉ tạo được ở us-east-1).
 
 #### Mục lục

@@ -10,6 +10,9 @@ pre: " <b> 5. </b> "
 
 This workshop guides you through deploying the **complete** WebFood architecture on AWS Management Console (click-ops) with screenshots for each step. Sections are grouped by **function** for clarity.
 
+> **Live demo (for reviewers):** [https://dh9xhc3jrccu4.cloudfront.net/](https://dh9xhc3jrccu4.cloudfront.net/)  
+> Reviewers can open this URL to explore the WebFood system deployed on AWS.
+
 > Required region: **us-east-1** (WAF for CloudFront must be created in us-east-1).
 
 #### Table of Contents
