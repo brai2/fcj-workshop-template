@@ -40,9 +40,9 @@ url = "https://www.facebook.com/groups/awsstudygroupfcj"
 weight = 20
 
 [Languages.vi]
-title = "BĂ¡o cĂ¡o thá»±c táº­p"
+title = "Báo cáo thực tập"
 weight = 2
-languageName = "Tiáº¿ng Viá»‡t"
+languageName = "Tiếng Việt"
 
 [[Languages.vi.menu.shortcuts]]
 name = "<i class='fab fa-aws'></i> AWS Study Group - Blog"
@@ -51,7 +51,7 @@ url = "http://awsstudygroup.com"
 weight = 20
 
 [[Languages.vi.menu.shortcuts]]
-name = "<i class='fab fa-facebook'></i> AWS Study Group - NhĂ³m FB"
+name = "<i class='fab fa-facebook'></i> AWS Study Group - Nhóm FB"
 identifier = "AWS Study Group FB"
 url = "https://www.facebook.com/groups/awsstudygroupfcj"
 weight = 20
